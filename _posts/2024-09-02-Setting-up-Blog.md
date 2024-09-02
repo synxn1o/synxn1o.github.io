@@ -10,7 +10,8 @@ To post blogs I have to
 5. git add . && git commit -m ".."
 6. git push -u origin main
 7. wait for github to compile it
-\# Setting up https://liuxy.space
+
+# Setting up https://liuxy.space
 I bought this domain for 10 years costing 188 yuan. After registered the domain with my ID card, I am now able to CNAME this site to the previous GitHub site.
 
 # Notes
