@@ -4,7 +4,7 @@ date: 2024-09-10
 category: [Lecture Notes, Mathematics]
 tags: [real analysis, functional analysis]
 math: true
-description: Lecture Notes for 0.Introduction to Real Analysis
+description: Lecture Notes for 0.Introduction to Real Analysis.
 ---
 This course aims to prepare for **functional analysis** and is composed by 2 parts:
 1. Integration (the sum of (weighted) function values on $$[a,b]$$) (measure, Lebesgue integration, ...)
