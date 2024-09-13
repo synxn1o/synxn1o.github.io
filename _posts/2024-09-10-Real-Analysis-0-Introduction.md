@@ -1,5 +1,5 @@
 ---
-title: Real Analysis Lecture 0: Introduction
+title: Real Analysis Lecture 0 Introduction
 date: 2024-09-10
 category: [Lecture Notes, Mathematics]
 tags: [real analysis, functional analysis]
