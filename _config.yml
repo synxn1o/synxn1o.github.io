@@ -19,7 +19,7 @@ title: Eric's Blog # the main title
 tagline: A witness of my life # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
-  I'm working on Applied Math and interested in Aerodynamics.
+  About a student's life who is studying applied mathematics at SUSTech.
 
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
@@ -95,7 +95,7 @@ theme_mode: # [light | dark]
 # will be added to all media resources (site avatar, posts' images, audio and video files) paths starting with '/'
 #
 # e.g. 'https://cdn.com'
-cdn:
+cdn: https://blogimg.liuxy.space/
 
 # the avatar on sidebar, support local or CORS resources
 avatar : /assets/img/favicons/avatar.JPG
