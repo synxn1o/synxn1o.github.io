@@ -2,7 +2,7 @@
 title: Setting up Blog
 date: 2024-09-02
 category: [Technology Notes, ]
-tags: [blog, jekyll]
+tags: [blogging]
 description: Setting up blog with Jekyll and GitHub Pages.
 ---
 ## Setting up https://synxn1o.github.io
@@ -19,10 +19,19 @@ To post blogs I have to
 7. wait for github to compile it
 
 ## Setting up https://liuxy.space
-I bought this domain for 10 years costing 188 yuan. After registered the domain with my ID card, I am now able to CNAME this site to the previous GitHub site.
+I bought this domain on Aliyun, 188yuan for 10 years. I am now able to CNAME this site to the previous GitHub site. (Using Cloudflare, see below)
+
+## Deposit to Cloudflare
+(updated 2024-09-14)
+I have deposited the domain to Cloudflare, and now I can use the SSL certificate provided by Cloudflare (valid for 15 years). The CDN (see below), DNS are managed by Cloudflare. Thanks to free cache and SSL services, the site is now faster and more secure. (also compiles faster on GitHub)
+Dashboard: [https://dash.cloudflare.com/](https://dash.cloudflare.com/)
+
+## Setting up CDN
+Using Cloudflare R2 stroge services (free plan), I can now store the images and other files in the CDN, which is faster and more reliable than GitHub Pages (though the origin server is still GitHub).
+The blog image bucket is now at [https://blogimg.liuxy.space](https://blogimg.liuxy.space).
 
 ## Notes
 
-1.  the SSL cert expires every 3 months.
-2.  I can move the site to cloudflare after 60 days (2mo).
-3.  I need to compile the webpage locally.
+1.  After 3 month, I can update the new SSL certificate signed by Cloudflare.
+2.  I can host the site to Cloudflare after 60 days (2mo).
+3.  I need to find a way to automate the process of uploading files to the CDN.
