@@ -16,7 +16,7 @@ timezone:
 
 title: Eric's Blog # the main title
 
-tagline: A witness of my life # it will display as the subtitle
+tagline: Look for the Light. # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
   About a student's life who is studying applied mathematics at SUSTech.
@@ -28,18 +28,18 @@ url: "https://synxn1o.github.io"
 github:
   username: synxn1o # change to your GitHub username
 
-twitter:
-  username: twitter_username # change to your Twitter username
+#twitter:
+#  username: twitter_username # change to your Twitter username
 
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
   name: Eric LIU
-  email: liuxy2022@mail.sustech.edu.cn # change to your email address
+  email: dawn@liuxy.space # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/username # change to your Twitter homepage
-    - https://github.com/username # change to your GitHub homepage
+    #- https://twitter.com/username # change to your Twitter homepage
+    - https://github.com/synxn1o # change to your GitHub homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
