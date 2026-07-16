@@ -10,20 +10,21 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^6.0.3",
-    "@astrojs/rss": "^4.0.18",
+    "@astrojs/markdown-remark": "^7.2.1",
+    "@astrojs/mdx": "^7.0.3",
+    "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.3",
     "@resvg/resvg-js": "^2.6.2",
-    "astro": "^6.4.5",
+    "astro": "^7.1.0",
     "bibliography": "^0.1.0",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
     "satori": "^0.25.0",
     "satori-html": "^0.3.2",
-    "sharp": "^0.34.3"
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
-    "@pagefind/default-ui": "^1.5.0",
-    "pagefind": "^1.4.0"
+    "@pagefind/default-ui": "^1.5.2",
+    "pagefind": "^1.5.2"
   }
 }

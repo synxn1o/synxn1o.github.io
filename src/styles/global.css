@@ -328,34 +328,6 @@ a:hover {
 	color: var(--color-text-muted);
 }
 
-/* Team Card */
-.team-card {
-	text-align: center;
-}
-
-.team-avatar {
-	width: 140px;
-	height: 140px;
-	border-radius: 50%;
-	object-fit: cover;
-	margin-bottom: 1rem;
-	border: 3px solid var(--color-accent-light);
-}
-
-.team-name {
-	font-weight: 700;
-	font-size: 1.1rem;
-	display: block;
-	color: var(--color-text-main);
-}
-
-.team-role {
-	font-size: 0.9rem;
-	color: var(--color-accent);
-	display: block;
-	margin-bottom: 0.5rem;
-}
-
 /* Project Card Override */
 .project-card {
 	background-color: var(--color-bg-offset);

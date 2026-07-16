@@ -1,18 +1,20 @@
 // Place any global data in this file.
 // You can import this data from anywhere in your site by using the `import` keyword.
 
-export const SITE_TITLE = 'Friedrich Nietzsche';
-export const SITE_DESCRIPTION = 'The academic portfolio of Friedrich Nietzsche.';
+export const SITE_TITLE = 'Eric Xiaoyun Liu';
+export const SITE_DESCRIPTION = 'The academic portfolio of Xiaoyun.';
 
-export const CV_URL = 'https://shravangoswami.com/resume.pdf';
+export const CV_URL = 'https://cdn.liuxy.space/academic/about/XiaoyunLiu_ms_cv_2eu.pdf';
 
 export const CONTACT = {
-  organization: 'Shravan Goswami',
+  organization: 'MATHSDISC',
   addressLines: [
-    'Creator of Astro Scholar',
+    'Università degli studi di Verona',
+    'Strada le Grazie, 15, 37134 Verona, Italy',
   ],
   emails: [
-    'contact@shravangoswami.com',
+    '12211218@mail.sustech.edu.cn',
+    'dawn@liuxy.space'
   ],
 };
 
@@ -24,32 +26,32 @@ export const SOCIAL_LINKS: ReadonlyArray<{
   icon: SocialIcon;
 }> = [
   {
+    label: 'Website',
+    href: 'https://liuxy.space',
+    icon: 'website',
+  },
+  {
     label: 'GitHub',
-    href: 'https://github.com/shravanngoswamii/astro-scholar',
+    href: 'https://github.com/synxn1o',
     icon: 'github',
   },
   {
     label: 'Email',
-    href: 'mailto:contact@shravangoswami.com',
+    href: 'mailto:12211218@mail.sustech.edu.cn',
     icon: 'email',
   },
   {
     label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/shravangoswami/',
+    href: 'https://www.linkedin.com/in/xiaoyun-liu-46915b318/',
     icon: 'linkedin',
-  },
-  {
-    label: 'X',
-    href: 'https://x.com/shravangoswamii',
-    icon: 'twitter',
-  },
+  }
 ];
 
 export const FOOTER_CREDIT = {
-  designerName: 'Shravan Goswami',
-  designerUrl: 'https://shravangoswami.com',
-  sourceLabel: 'Open Source',
-  sourceUrl: 'https://github.com/shravanngoswamii/astro-scholar',
+  // designerName: 'Shravan Goswami',
+  // designerUrl: 'https://shravangoswami.com',
+  // sourceLabel: 'Open Source',
+  // sourceUrl: 'https://github.com/shravanngoswamii/astro-scholar',
 };
 
 // Umami analytics — configured via environment variables so no tracking ID is

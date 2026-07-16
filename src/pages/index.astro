@@ -127,13 +127,13 @@ const formatAuthor = (auth: Author) => {
 		<main>
 			<section class="hero">
 				<div class="hero-content">
-					<h1 style="margin-bottom: 0.5rem; font-size: 3rem;">Friedrich Nietzsche</h1>
+					<h1 style="margin-bottom: 0.5rem; font-size: 3rem;">Eric Xiaoyun Liu</h1>
 					<h2 style="font-weight: 400; color: var(--color-text-muted); margin-bottom: 1.5rem; font-family: var(--font-sans); text-transform: uppercase; letter-spacing: 0.05em; font-size: 1rem; border-bottom: none; padding-bottom: 0; display: block; margin-top: 0;">
-						Professor of Philosophy<br/>
-						Institute for Advanced Study
+						Master student of Applied Math<br/>
+						MATHSDISC program
 					</h2>
 					<p style="font-size: 1.1rem; line-height: 1.7; margin-bottom: 2rem;">
-						Welcome to my academic portfolio. My research focuses on <strong>Philosophy of Culture, Morality, and the Will to Power</strong>. I lead the Philosophy Group where we challenge conventional thinking and explore the transformation of human values and civilization.
+						Welcome to my academic portfolio. My research focuses on <strong>Applied and Computational Topology, Computational Intelligence & Complex Systems Optimization</strong>. I graduated from Southern University of Science and Technology, supervised by Prof. Yifei Zhu.
 					</p>
 					<div class="hero-buttons">
 						<a href={url('/publications')} class="btn">View Publications</a>
@@ -141,7 +141,7 @@ const formatAuthor = (auth: Author) => {
 					</div>
 				</div>
 				<div class="hero-image">
-					<Image src={url('/nietzsche.jpg')} width={280} height={280} alt="Professor Portrait" fetchpriority="high" decoding="async" />
+					<Image src=https://cdn.liuxy.space/academic/favicons/academic_blog_avatar.jpg width={280} height={280} alt="Portrait" fetchpriority="high" decoding="async" />
 				</div>
 			</section>
 
@@ -171,7 +171,7 @@ const formatAuthor = (auth: Author) => {
                 </section>
 
                 <section>
-                    <h2 style="margin-top: 0;">Lab News</h2>
+                    <h2 style="margin-top: 0;">Academic News</h2>
                     <ul style="list-style: none; padding: 0;">
                         {posts.map((post) => (
                             <li style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px dashed var(--color-border);">
