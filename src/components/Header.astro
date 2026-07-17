@@ -14,14 +14,7 @@ const cvHref = CV_URL ? url(CV_URL) : null;
 			<HeaderLink href={url('/')}>Home</HeaderLink>
 			<HeaderLink href={url('/publications')}>Publications</HeaderLink>
 			<HeaderLink href={url('/projects')}>Projects</HeaderLink>
-			<div class="dropdown">
-				<button class="dropbtn">Blog</button>
-				<div class="dropdown-content">
-					<HeaderLink href={url('/blog')}>News</HeaderLink>
-					<HeaderLink href={url('/tags')}>Tags</HeaderLink>
-					<HeaderLink href={url('/archive')}>Archive</HeaderLink>
-				</div>
-			</div>
+            <HeaderLink href={url('/blog')}>Blog</HeaderLink>
 			{cvHref && <HeaderLink href={cvHref} target="_blank">CV</HeaderLink>}
 		</div>
 
@@ -53,12 +46,7 @@ const cvHref = CV_URL ? url(CV_URL) : null;
         <a href={url('/')}>Home</a>
         <a href={url('/publications')}>Publications</a>
         <a href={url('/projects')}>Projects</a>
-        <span class="mobile-menu-section">Blog</span>
-        <div class="mobile-submenu">
-            <a href={url('/blog')}>News</a>
-            <a href={url('/tags')}>Tags</a>
-            <a href={url('/archive')}>Archive</a>
-        </div>
+        <a href={url('/blog')}>Blog</a>
         {cvHref && <a href={cvHref} target="_blank">CV</a>}
     </div>
 </header>

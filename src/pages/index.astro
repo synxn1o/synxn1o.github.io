@@ -5,73 +5,14 @@ import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import bibFileRaw from '../data/publications.bib?raw';
+import projectsData from '../data/projects.json';
 import { url } from '../utils/paths';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 ).slice(0, 3);
 
-interface Author {
-	first: string;
-	last: string;
-}
-
-interface BibEntry {
-	type: string;
-	key: string;
-	fields: Record<string, string>;
-	authors: Author[];
-}
-
-function parseBibTeX(input: string): BibEntry[] {
-    const entries: BibEntry[] = [];
-    const rawEntries = input.split(/@(\w+)\s*\{/g).slice(1);
-
-    for (let i = 0; i < rawEntries.length; i += 2) {
-        const type = rawEntries[i].trim();
-        const body = rawEntries[i+1];
-        if (!body) continue;
-
-        const keyMatch = body.match(/^\s*([^,]+),/);
-        const key = keyMatch ? keyMatch[1].trim() : 'unknown';
-        
-        const fields: Record<string, string> = { title: "Untitled", year: "0000" };
-        const fieldRegex = /(\w+)\s*=\s*(?:\{((?:[^{}]|{[^{}]*})*)\}|"((?:[^"]|\\")*)"|(\d+))/g;
-        
-        let match;
-        while ((match = fieldRegex.exec(body)) !== null) {
-            const fieldKey = match[1].toLowerCase();
-            const val = match[2] || match[3] || match[4] || "";
-            fields[fieldKey] = val.replace(/\s+/g, ' ').trim();
-        }
-
-        let authors: Author[] = [];
-        if (fields.author) {
-            authors = fields.author.split(/\s+and\s+/i).map(str => {
-                const parts = str.split(',');
-                if (parts.length > 1) {
-                    return { first: parts[1].trim(), last: parts[0].trim() };
-                } else {
-                    const names = str.trim().split(' ');
-                    const last = names.pop() || "";
-                    const first = names.join(' ');
-                    return { first, last };
-                }
-            });
-        }
-        entries.push({ type, key, fields, authors });
-    }
-    return entries;
-}
-
-const publications = parseBibTeX(bibFileRaw).sort((a, b) => {
-    return (parseInt(b.fields.year) || 0) - (parseInt(a.fields.year) || 0);
-}).slice(0, 3);
-
-const formatAuthor = (auth: Author) => {
-    return auth.first ? `${auth.first} ${auth.last}` : auth.last;
-};
+const recentProjects = projectsData.sort((a, b) => b.year - a.year).slice(0, 3);
 ---
 
 <!doctype html>
@@ -101,14 +42,16 @@ const formatAuthor = (auth: Author) => {
 				box-shadow: 0 0 0 1px var(--color-border), var(--shadow-lg);
 			}
             
-            .pub-mini-item {
+            .project-mini-item {
                 margin-bottom: 1.5rem;
                 padding-bottom: 1.5rem;
                 border-bottom: 1px solid var(--color-border);
             }
-            .pub-mini-item:last-child { border-bottom: none; margin-bottom: 0; }
-            .pub-title { font-weight: 700; color: var(--color-text-main); display: block; margin-bottom: 0.25rem; font-family: var(--font-serif); font-size: 1.1rem; }
-            .pub-meta { font-size: 0.9rem; color: var(--color-text-muted); }
+            .project-mini-item:last-child { border-bottom: none; margin-bottom: 0; }
+            .project-mini-title { font-weight: 700; color: var(--color-text-main); display: block; margin-bottom: 0.25rem; font-family: var(--font-serif); font-size: 1.1rem; }
+            .project-mini-title a { color: inherit; text-decoration: none; }
+            .project-mini-title a:hover { text-decoration: underline; }
+            .project-mini-meta { font-size: 0.9rem; color: var(--color-text-muted); }
 
 			.hero-buttons {
 				display: flex;
@@ -149,24 +92,24 @@ const formatAuthor = (auth: Author) => {
 
 			<div class="grid-2" style="gap: 4rem; margin-top: 0;">
                 <section>
-                    <h2 style="margin-top: 0;">Selected Publications</h2>
-                    <div class="publication-list">
-                        {publications.length > 0 ? publications.map((pub) => (
-                            <div class="pub-mini-item">
-                                <span class="pub-title">{pub.fields.title.replace(/[{}]/g, '')}</span>
-                                <div class="pub-meta">
-                                    {pub.authors.map(a => formatAuthor(a)).join(', ')}
-                                    <br/>
-                                    <span style="font-style: italic; color: var(--color-accent);">
-                                        {(pub.fields.journal || pub.fields.booktitle || pub.fields.publisher || "Preprint").replace(/[{}]/g, '')}
-                                    </span>
-                                    {pub.fields.year && <span>, {pub.fields.year}</span>}
+                    <h2 style="margin-top: 0;">Recent Projects</h2>
+                    <div>
+                        {recentProjects.length > 0 ? recentProjects.map((project) => (
+                            <div class="project-mini-item">
+                                <span class="project-mini-title">
+                                    {project.link ? (
+                                        <a href={project.link} target="_blank">{project.title}</a>
+                                    ) : project.title}
+                                </span>
+                                <div class="project-mini-meta">
+                                    <span style="font-style: italic; color: var(--color-accent);">{project.category}</span>
+                                    <span>, {project.year}</span>
                                 </div>
                             </div>
-                        )) : <p>No publications found.</p>}
+                        )) : <p>No projects found.</p>}
                     </div>
                     <div style="margin-top: 1.5rem;">
-                        <a href={url('/publications')} style="font-weight: 600;">View Full List &rarr;</a>
+                        <a href={url('/projects')} style="font-weight: 600;">View All Projects &rarr;</a>
                     </div>
                 </section>
 

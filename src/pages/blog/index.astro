@@ -1,0 +1,472 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import Header from '../../components/Header.astro';
+import AuthorLink from '../../components/AuthorLink.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import { url } from '../../utils/paths';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+// Derive unique categories
+const categoriesMap = new Map<string, string>();
+posts.forEach((post) => {
+	if (post.data.category) {
+		const slug = post.data.category.toLowerCase().replace(/\s+/g, '-');
+		categoriesMap.set(slug, post.data.category);
+	}
+});
+const categories = Array.from(categoriesMap.entries()).map(([slug, name]) => ({ slug, name }));
+
+// Derive unique tags
+const tagsMap = new Map<string, string>();
+posts.forEach((post) => {
+	(post.data.tags || []).forEach((tag) => {
+		const slug = tag.toLowerCase().replace(/\s+/g, '-');
+		tagsMap.set(slug, tag);
+	});
+});
+const tags = Array.from(tagsMap.entries()).map(([slug, name]) => ({ slug, name }));
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			.blog-list {
+				display: flex;
+				flex-direction: column;
+				gap: 3rem;
+				margin-top: 3rem;
+			}
+			.blog-post-card {
+				display: flex;
+				gap: 2.5rem;
+				align-items: flex-start;
+				padding-bottom: 3rem;
+				border-bottom: 1px solid var(--color-border);
+			}
+			.blog-post-card:last-child {
+				border-bottom: none;
+			}
+
+			.blog-thumb {
+				width: 280px;
+				flex-shrink: 0;
+				border-radius: 8px;
+				overflow: hidden;
+				box-shadow: var(--shadow-md);
+				aspect-ratio: 16/9;
+				display: block;
+				order: 2;
+				align-self: flex-start;
+			}
+			.blog-thumb img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				transition: transform 0.4s ease, filter 0.3s ease;
+			}
+			.blog-post-card:hover .blog-thumb img {
+				transform: scale(1.03);
+				filter: brightness(1.05);
+			}
+
+			.blog-content {
+				flex: 1;
+				order: 1;
+				padding-right: 1rem;
+			}
+			.blog-title {
+				margin: -0.2rem 0 0.75rem 0;
+				font-family: var(--font-serif);
+				font-size: 1.75rem;
+				line-height: 1.25;
+				letter-spacing: -0.01em;
+			}
+			.blog-title a {
+				color: var(--color-text-main);
+				text-decoration: none;
+				transition: color 0.2s;
+			}
+			.blog-title a:hover {
+				color: var(--color-accent);
+			}
+			.blog-meta {
+				font-size: 0.85rem;
+				color: var(--color-text-muted);
+				margin-bottom: 1rem;
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5rem;
+				align-items: center;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+				font-weight: 500;
+			}
+			.meta-divider {
+				color: #ddd;
+			}
+			.blog-desc {
+				margin: 0 0 1.5rem 0;
+				color: var(--color-text-muted);
+				line-height: 1.7;
+				font-size: 1.05rem;
+			}
+			.read-more {
+				font-size: 0.9rem;
+				font-weight: 700;
+				color: var(--color-accent);
+				display: inline-flex;
+				align-items: center;
+				text-decoration: none;
+				border-bottom: 2px solid transparent;
+				transition: border-color 0.2s;
+			}
+			.read-more:hover {
+				border-bottom-color: var(--color-accent);
+			}
+
+			/* Filter styles */
+			.filter-section {
+				margin-bottom: 1.25rem;
+			}
+			.filter-label {
+				font-size: 0.7rem;
+				text-transform: uppercase;
+				letter-spacing: 0.1em;
+				color: var(--color-text-muted);
+				margin-bottom: 0.6rem;
+				font-weight: 600;
+			}
+			.filter-pills {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5rem;
+			}
+			.filter-pill {
+				padding: 0.3rem 0.85rem;
+				border: 1px solid var(--color-border);
+				border-radius: 999px;
+				font-size: 0.78rem;
+				color: var(--color-text-muted);
+				cursor: pointer;
+				transition: all 0.2s ease;
+				text-decoration: none;
+				background: transparent;
+			}
+			.filter-pill:hover {
+				color: var(--color-text-main);
+				border-color: var(--color-text-main);
+			}
+			.filter-pill.active {
+				background: var(--color-text-main);
+				border-color: var(--color-text-main);
+				color: var(--color-bg);
+			}
+			.filter-pill.tag-pill {
+				padding: 0.25rem 0.7rem;
+				font-size: 0.73rem;
+			}
+			.filter-pill.tag-pill.active {
+				background: transparent;
+				border-color: var(--color-accent);
+				color: var(--color-accent);
+			}
+
+			/* Empty state */
+			.blog-empty {
+				text-align: center;
+				color: var(--color-text-muted);
+				padding: 3rem 0;
+			}
+
+			/* Load more */
+			.load-more-wrap {
+				display: flex;
+				justify-content: center;
+				margin-top: 2.5rem;
+			}
+			.load-more-btn {
+				padding: 0.5rem 1.2rem;
+				border: 1px solid var(--color-border);
+				border-radius: 8px;
+				background: transparent;
+				cursor: pointer;
+				font-weight: 500;
+				color: var(--color-text-main);
+				font-size: 0.9rem;
+				transition: all 0.2s ease;
+			}
+			.load-more-btn:hover {
+				background: var(--color-text-main);
+				color: var(--color-bg);
+			}
+
+			@media (max-width: 720px) {
+				.blog-post-card {
+					flex-direction: column-reverse;
+					gap: 1.5rem;
+					padding-bottom: 2rem;
+				}
+				.blog-thumb {
+					width: 100%;
+					height: auto;
+					aspect-ratio: 16/9;
+					box-shadow: var(--shadow-sm);
+				}
+				.blog-content {
+					padding-right: 0;
+				}
+				.blog-title {
+					font-size: 1.5rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main data-blog>
+			<h1>Lab News & Updates</h1>
+			<p style="margin-bottom: 2rem; max-width: 700px; color: var(--color-text-muted);">
+				Explore our latest research highlights, tutorials, and announcements.
+			</p>
+
+			{/* Category Filter */}
+			{categories.length > 0 && (
+				<div class="filter-section">
+					<div class="filter-label">CATEGORIES</div>
+					<div class="filter-pills" data-category-filters>
+						<button class="filter-pill active" data-category-filter="">All</button>
+						{categories.map((cat) => (
+							<button class="filter-pill" data-category-filter={cat.slug}>{cat.name}</button>
+						))}
+					</div>
+				</div>
+			)}
+
+			{/* Tag Filter */}
+			{tags.length > 0 && (
+				<div class="filter-section">
+					<div class="filter-label">TAGS</div>
+					<div class="filter-pills" data-tag-filters>
+						{tags.map((tag) => (
+							<button class="filter-pill tag-pill" data-tag-filter={tag.slug}>#{tag.name}</button>
+						))}
+					</div>
+				</div>
+			)}
+
+			{/* Blog Post List */}
+			<div class="blog-list" data-blog-list>
+				{posts.map((post) => {
+					const categorySlug = post.data.category
+						? post.data.category.toLowerCase().replace(/\s+/g, '-')
+						: '';
+					const tagSlugs = (post.data.tags || [])
+						.map((t) => t.toLowerCase().replace(/\s+/g, '-'))
+						.join(' ');
+
+					return (
+						<article
+							class="blog-post-card"
+							data-post
+							data-category={categorySlug}
+							data-tags={tagSlugs}
+						>
+							<div class="blog-content">
+								<h2 class="blog-title">
+									<a href={url(`/blog/${post.id}/`)}>{post.data.title}</a>
+								</h2>
+
+								<div class="blog-meta">
+									<FormattedDate date={post.data.pubDate} />
+
+									{post.data.authors && post.data.authors.length > 0 && (
+										<>
+											<span class="meta-divider">&bull;</span>
+											{post.data.authors.map((authorId, i) => (
+												<span>
+													<AuthorLink nameOrSlug={authorId} />
+													{i < post.data.authors!.length - 1 ? ', ' : ''}
+												</span>
+											))}
+										</>
+									)}
+									{post.data.tags && post.data.tags.length > 0 && (
+										<>
+											<span class="meta-divider">&bull;</span>
+											<span class="blog-tags" style="display: inline-flex; gap: 0.25rem;">
+												{post.data.tags.map((tag) => (
+													<a href={url(`/tags/${tag}`)} style="text-decoration: none; color: var(--color-accent); font-weight: 600;">#{tag}</a>
+												))}
+											</span>
+										</>
+									)}
+								</div>
+
+								<p class="blog-desc">
+									{post.data.description}
+								</p>
+
+								<a href={url(`/blog/${post.id}/`)} class="read-more">Read Article &rarr;</a>
+							</div>
+
+							<a href={url(`/blog/${post.id}/`)} class="blog-thumb">
+								{post.data.heroImage ? (
+									<Image width={560} height={315} src={post.data.heroImage} alt={post.data.title} />
+								) : (
+									<img src={url(`/blog/${post.id}.png`)} alt={post.data.title} />
+								)}
+							</a>
+						</article>
+					);
+				})}
+			</div>
+
+			{/* Empty State */}
+			<div class="blog-empty" data-blog-empty hidden>
+				<p>No posts match the selected filters.</p>
+			</div>
+
+			{/* Load More */}
+			<div class="load-more-wrap" data-load-more-wrap hidden>
+				<button class="load-more-btn" data-load-more>Load more</button>
+			</div>
+		</main>
+		<Footer />
+
+		<script>
+			const blogContainer = document.querySelector('[data-blog]');
+			if (blogContainer) {
+				const PAGE_SIZE = 10;
+
+				const posts = [...blogContainer.querySelectorAll('[data-post]')];
+				const categoryButtons = [...blogContainer.querySelectorAll('[data-category-filter]')];
+				const tagButtons = [...blogContainer.querySelectorAll('[data-tag-filter]')];
+				const emptyState = blogContainer.querySelector('[data-blog-empty]');
+				const loadMoreWrap = blogContainer.querySelector('[data-load-more-wrap]');
+				const loadMoreBtn = blogContainer.querySelector('[data-load-more]');
+
+				let currentPage = 1;
+
+				// Read state from URL
+				const stateFromUrl = () => {
+					const params = new URLSearchParams(window.location.search);
+					return {
+						cat: params.get('cat') || '',
+						tag: params.get('tag') || '',
+					};
+				};
+
+				// Write state to URL
+				const writeUrl = (state: { cat: string; tag: string }) => {
+					const params = new URLSearchParams();
+					if (state.cat) params.set('cat', state.cat);
+					if (state.tag) params.set('tag', state.tag);
+					const query = params.toString();
+					history.pushState(state, '', query ? `/blog/?${query}` : '/blog/');
+				};
+
+				// Filter posts
+				const getFilteredPosts = (cat: string, tag: string) => {
+					return posts.filter((post) => {
+						const postCat = post.getAttribute('data-category') || '';
+						const postTags = (post.getAttribute('data-tags') || '').split(' ');
+
+						if (cat && postCat !== cat) return false;
+						if (tag && !postTags.includes(tag)) return false;
+						return true;
+					});
+				};
+
+				// Render filtered posts
+				const render = (state: { cat: string; tag: string }, resetPage = true) => {
+					if (resetPage) currentPage = 1;
+
+					const filtered = getFilteredPosts(state.cat, state.tag);
+					const visibleCount = Math.min(filtered.length, currentPage * PAGE_SIZE);
+
+					// Hide all posts
+					posts.forEach((post) => (post as HTMLElement).hidden = true);
+
+					// Show filtered posts
+					filtered.slice(0, visibleCount).forEach((post) => (post as HTMLElement).hidden = false);
+
+					// Update category button states
+					categoryButtons.forEach((btn) => {
+						const filterValue = btn.getAttribute('data-category-filter') || '';
+						const isActive = filterValue === state.cat;
+						btn.classList.toggle('active', isActive);
+					});
+
+					// Update tag button states
+					tagButtons.forEach((btn) => {
+						const filterValue = btn.getAttribute('data-tag-filter') || '';
+						const isActive = filterValue === state.tag;
+						btn.classList.toggle('active', isActive);
+					});
+
+					// Show/hide empty state
+					if (emptyState) {
+						(emptyState as HTMLElement).hidden = filtered.length > 0;
+					}
+
+					// Show/hide load more button
+					if (loadMoreWrap) {
+						(loadMoreWrap as HTMLElement).hidden = visibleCount >= filtered.length;
+					}
+					if (loadMoreBtn) {
+						loadMoreBtn.textContent = `Load more (${filtered.length - visibleCount} remaining)`;
+					}
+				};
+
+				// Category filter click
+				categoryButtons.forEach((btn) => {
+					btn.addEventListener('click', () => {
+						const state = stateFromUrl();
+						const newCat = btn.getAttribute('data-category-filter') || '';
+						const newState = { ...state, cat: newCat };
+						writeUrl(newState);
+						render(newState);
+					});
+				});
+
+				// Tag filter click
+				tagButtons.forEach((btn) => {
+					btn.addEventListener('click', () => {
+						const state = stateFromUrl();
+						const tagValue = btn.getAttribute('data-tag-filter') || '';
+						const newTag = state.tag === tagValue ? '' : tagValue;
+						const newState = { ...state, tag: newTag };
+						writeUrl(newState);
+						render(newState);
+					});
+				});
+
+				// Load more click
+				if (loadMoreBtn) {
+					loadMoreBtn.addEventListener('click', () => {
+						currentPage++;
+						const state = stateFromUrl();
+						render(state, false);
+					});
+				}
+
+				// Browser back/forward
+				window.addEventListener('popstate', () => {
+					render(stateFromUrl());
+				});
+
+				// Initial render
+				render(stateFromUrl());
+			}
+		</script>
+	</body>
+</html>

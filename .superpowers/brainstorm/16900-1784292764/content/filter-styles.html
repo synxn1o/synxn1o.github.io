@@ -1,0 +1,109 @@
+<h2>Blog Filter UI Styles</h2>
+<p class="subtitle">How should the category and tag filters look?</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Reference Style (Pill Buttons)</h3>
+      <p>Thin uppercase labels with rounded pill buttons. Matches the /mnt/e/blog implementation.</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Minimal Underline</h3>
+      <p>Text-based filters with underline highlight for active state. Cleaner, more subtle.</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Solid Background Pills</h3>
+      <p>More prominent pills with solid background on active state. Higher visual weight.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top: 2rem;">
+  <h3>Preview: Option A (Reference Style)</h3>
+  <div class="mockup">
+    <div class="mockup-header">Filter UI - Pill Buttons</div>
+    <div class="mockup-body" style="padding: 1.5rem; font-family: system-ui, sans-serif;">
+      <div style="margin-bottom: 1.5rem;">
+        <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: #666; margin-bottom: 0.75rem; font-weight: 600;">CATEGORIES</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+          <span style="padding: 0.35rem 0.9rem; border: 1px solid #333; border-radius: 999px; font-size: 0.8rem; background: #333; color: white; cursor: pointer;">All</span>
+          <span style="padding: 0.35rem 0.9rem; border: 1px solid #ddd; border-radius: 999px; font-size: 0.8rem; color: #666; cursor: pointer;">Research</span>
+          <span style="padding: 0.35rem 0.9rem; border: 1px solid #ddd; border-radius: 999px; font-size: 0.8rem; color: #666; cursor: pointer;">Tutorial</span>
+          <span style="padding: 0.35rem 0.9rem; border: 1px solid #ddd; border-radius: 999px; font-size: 0.8rem; color: #666; cursor: pointer;">News</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: #666; margin-bottom: 0.75rem; font-weight: 600;">TAGS</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+          <span style="padding: 0.3rem 0.75rem; border: 1px solid #ddd; border-radius: 999px; font-size: 0.75rem; color: #666; cursor: pointer;">#markdown</span>
+          <span style="padding: 0.3rem 0.75rem; border: 1px solid #e74c3c; border-radius: 999px; font-size: 0.75rem; color: #e74c3c; cursor: pointer;">#astro</span>
+          <span style="padding: 0.3rem 0.75rem; border: 1px solid #ddd; border-radius: 999px; font-size: 0.75rem; color: #666; cursor: pointer;">#SEO</span>
+          <span style="padding: 0.3rem 0.75rem; border: 1px solid #ddd; border-radius: 999px; font-size: 0.75rem; color: #666; cursor: pointer;">#writing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top: 2rem;">
+  <h3>Preview: Option B (Minimal Underline)</h3>
+  <div class="mockup">
+    <div class="mockup-header">Filter UI - Underline Style</div>
+    <div class="mockup-body" style="padding: 1.5rem; font-family: system-ui, sans-serif;">
+      <div style="margin-bottom: 1.5rem;">
+        <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: #666; margin-bottom: 0.75rem; font-weight: 600;">CATEGORIES</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+          <span style="font-size: 0.85rem; cursor: pointer; border-bottom: 2px solid #333; padding-bottom: 0.15rem; font-weight: 600;">All</span>
+          <span style="font-size: 0.85rem; cursor: pointer; border-bottom: 2px solid transparent; padding-bottom: 0.15rem; color: #888;">Research</span>
+          <span style="font-size: 0.85rem; cursor: pointer; border-bottom: 2px solid transparent; padding-bottom: 0.15rem; color: #888;">Tutorial</span>
+          <span style="font-size: 0.85rem; cursor: pointer; border-bottom: 2px solid transparent; padding-bottom: 0.15rem; color: #888;">News</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: #666; margin-bottom: 0.75rem; font-weight: 600;">TAGS</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+          <span style="font-size: 0.8rem; cursor: pointer; color: #888;">#markdown</span>
+          <span style="font-size: 0.8rem; cursor: pointer; border-bottom: 2px solid #e74c3c; color: #e74c3c; font-weight: 500;">#astro</span>
+          <span style="font-size: 0.8rem; cursor: pointer; color: #888;">#SEO</span>
+          <span style="font-size: 0.8rem; cursor: pointer; color: #888;">#writing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top: 2rem;">
+  <h3>Preview: Option C (Solid Background)</h3>
+  <div class="mockup">
+    <div class="mockup-header">Filter UI - Solid Background</div>
+    <div class="mockup-body" style="padding: 1.5rem; font-family: system-ui, sans-serif;">
+      <div style="margin-bottom: 1.5rem;">
+        <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: #666; margin-bottom: 0.75rem; font-weight: 600;">CATEGORIES</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+          <span style="padding: 0.4rem 1rem; border-radius: 6px; font-size: 0.8rem; background: #e74c3c; color: white; cursor: pointer; font-weight: 500;">All</span>
+          <span style="padding: 0.4rem 1rem; border-radius: 6px; font-size: 0.8rem; background: #f5f5f5; color: #666; cursor: pointer;">Research</span>
+          <span style="padding: 0.4rem 1rem; border-radius: 6px; font-size: 0.8rem; background: #f5f5f5; color: #666; cursor: pointer;">Tutorial</span>
+          <span style="padding: 0.4rem 1rem; border-radius: 6px; font-size: 0.8rem; background: #f5f5f5; color: #666; cursor: pointer;">News</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: #666; margin-bottom: 0.75rem; font-weight: 600;">TAGS</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+          <span style="padding: 0.3rem 0.75rem; border-radius: 6px; font-size: 0.75rem; background: #f5f5f5; color: #666; cursor: pointer;">#markdown</span>
+          <span style="padding: 0.3rem 0.75rem; border-radius: 6px; font-size: 0.75rem; background: #e74c3c; color: white; cursor: pointer;">#astro</span>
+          <span style="padding: 0.3rem 0.75rem; border-radius: 6px; font-size: 0.75rem; background: #f5f5f5; color: #666; cursor: pointer;">#SEO</span>
+          <span style="padding: 0.3rem 0.75rem; border-radius: 6px; font-size: 0.75rem; background: #f5f5f5; color: #666; cursor: pointer;">#writing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -14,7 +14,7 @@
     "title": "Mathematical Contest in Modeling 2025",
     "description": "Developed a network model to analyze, simulate, and optimize traffic flows of various transportation shares in Baltimore, MD. Won the Honorable Mention Prize in the MCM-ICM 2025 competition.",
     "year": 2024,
-    "category":"Competition",
+    "category":"Contest",
     "status": "Honorable Mention",
     "authors": ["xiaoyun-liu"],
     "link": null
@@ -44,7 +44,7 @@
     "title": "CUMCM 2023 — Bayesian Pricing & Inventory Strategy",
     "description": "Proposed a Bayesian pricing and inventory strategy model, optimized via polar coordinate transformations and integrated with machine learning algorithms. Awarded Provincial Third Prize in the China Undergraduate Mathematical Contest in Modeling (CUMCM) 2023.",
     "year": 2023,
-    "category":"Competition",
+    "category":"Contest",
     "status": "Provincial Third Prize",
     "authors": ["xiaoyun-liu"],
     "link": "https://github.com/synxn1o/Spring-2024-SUSTECH/blob/main/Automatic%20Pricing%20and%20Inventory%20Replenishment%20Strategy%20Model%20Based%20on%20Polar%20Coordinate%20Transformation%20Regression.pdf"
