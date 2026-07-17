@@ -343,7 +343,7 @@ const tags = Array.from(tagsMap.entries()).map(([slug, name]) => ({ slug, name }
 		</main>
 		<Footer />
 
-		<script>
+		<script is:inline>
 			const blogContainer = document.querySelector('[data-blog]');
 			if (blogContainer) {
 				const PAGE_SIZE = 10;
@@ -397,10 +397,10 @@ const tags = Array.from(tagsMap.entries()).map(([slug, name]) => ({ slug, name }
 					const remaining = filtered.length - visibleCount;
 
 					// Hide all posts
-					posts.forEach((post) => (post as HTMLElement).hidden = true);
+					posts.forEach((post) => { post.hidden = true; });
 
 					// Show filtered posts
-					filtered.slice(0, visibleCount).forEach((post) => (post as HTMLElement).hidden = false);
+					filtered.slice(0, visibleCount).forEach((post) => { post.hidden = false; });
 
 					// Update category button states
 					categoryButtons.forEach((btn) => {
@@ -418,18 +418,18 @@ const tags = Array.from(tagsMap.entries()).map(([slug, name]) => ({ slug, name }
 
 					// Show/hide empty state
 					if (emptyState) {
-						(emptyState as HTMLElement).hidden = filtered.length > 0;
+						emptyState.hidden = filtered.length > 0;
 					}
 
 					// Show/hide load more button
 					if (loadMoreWrap) {
 						if (remaining > 0) {
-							(loadMoreWrap as HTMLElement).hidden = false;
+							loadMoreWrap.hidden = false;
 							if (loadMoreBtn) {
 								loadMoreBtn.textContent = `Load more (${remaining} remaining)`;
 							}
 						} else {
-							(loadMoreWrap as HTMLElement).hidden = true;
+							loadMoreWrap.hidden = true;
 						}
 					}
 				};
@@ -466,11 +466,7 @@ const tags = Array.from(tagsMap.entries()).map(([slug, name]) => ({ slug, name }
 				});
 
 				// Initial render
-				try {
-					render(stateFromUrl());
-				} catch (e) {
-					console.error('Blog filter error:', e);
-				}
+				render(stateFromUrl());
 			}
 		</script>
 	</body>
