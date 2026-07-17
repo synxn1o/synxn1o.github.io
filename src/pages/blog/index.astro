@@ -421,12 +421,16 @@ const tags = Array.from(tagsMap.entries()).map(([slug, name]) => ({ slug, name }
 						(emptyState as HTMLElement).hidden = filtered.length > 0;
 					}
 
-					// Show/hide load more button - hide if no remaining posts
+					// Show/hide load more button
 					if (loadMoreWrap) {
-						(loadMoreWrap as HTMLElement).hidden = remaining <= 0;
-					}
-					if (loadMoreBtn && remaining > 0) {
-						loadMoreBtn.textContent = `Load more (${remaining} remaining)`;
+						if (remaining > 0) {
+							(loadMoreWrap as HTMLElement).hidden = false;
+							if (loadMoreBtn) {
+								loadMoreBtn.textContent = `Load more (${remaining} remaining)`;
+							}
+						} else {
+							(loadMoreWrap as HTMLElement).hidden = true;
+						}
 					}
 				};
 
