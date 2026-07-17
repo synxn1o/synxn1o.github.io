@@ -5,6 +5,7 @@ pubDate: '2026-04-01'
 authors:
   - friedrich-nietzsche
 toc: true
+category: Tutorial
 tags:
   - markdown
   - writing

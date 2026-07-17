@@ -7,6 +7,7 @@ authors:
   - shravan-goswami
   - friedrich-nietzsche
   - simone-de-beauvoir
+category: Tutorial
 toc: true
 ---
 

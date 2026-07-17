@@ -2,6 +2,7 @@
 title: 'Perspectivism: The Philosophy of Multiple Truths'
 description: 'An exploration of perspectivism and why there are no absolute truths, only interpretations.'
 pubDate: '2026-04-06'
+category: Research
 ---
 
 

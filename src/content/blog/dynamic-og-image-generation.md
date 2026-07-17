@@ -5,6 +5,7 @@ pubDate: '2026-04-02'
 authors:
   - simone-de-beauvoir
 toc: true
+category: Tutorial
 tags:
   - astro
   - SEO

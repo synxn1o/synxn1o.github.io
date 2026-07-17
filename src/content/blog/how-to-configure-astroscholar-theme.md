@@ -5,6 +5,7 @@ pubDate: '2026-04-03'
 authors:
   - shravan-goswami
 toc: true
+category: Tutorial
 tags:
   - astro
   - tutorial

@@ -5,6 +5,7 @@ pubDate: '2026-04-09'
 authors:
   - shravan-goswami
 toc: true
+category: Tutorial
 tags:
   - astro
   - performance
