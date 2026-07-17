@@ -15,6 +15,7 @@ const blog = defineCollection({
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
 			heroImage: image().optional(),
+			thumbnail: z.string().optional(), // URL for blog list thumbnail
 			authors: z.array(z.string()).optional(), // References 'id' in authors.json
 			toc: z.boolean().optional(),
 			tags: z.array(z.string()).optional(),
