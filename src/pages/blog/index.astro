@@ -13,11 +13,15 @@ const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
+const slugify = (text: string) => text.toLowerCase().replace(/\s+/g, '-');
+
+const blogPath = url('/blog/');
+
 // Derive unique categories
 const categoriesMap = new Map<string, string>();
 posts.forEach((post) => {
 	if (post.data.category) {
-		const slug = post.data.category.toLowerCase().replace(/\s+/g, '-');
+		const slug = slugify(post.data.category);
 		categoriesMap.set(slug, post.data.category);
 	}
 });
@@ -27,7 +31,7 @@ const categories = Array.from(categoriesMap.entries()).map(([slug, name]) => ({ 
 const tagsMap = new Map<string, string>();
 posts.forEach((post) => {
 	(post.data.tags || []).forEach((tag) => {
-		const slug = tag.toLowerCase().replace(/\s+/g, '-');
+		const slug = slugify(tag);
 		tagsMap.set(slug, tag);
 	});
 });
@@ -37,7 +41,7 @@ const tags = Array.from(tagsMap.entries()).map(([slug, name]) => ({ slug, name }
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={`Blog | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
 		<style>
 			.blog-list {
 				display: flex;
@@ -232,7 +236,7 @@ const tags = Array.from(tagsMap.entries()).map(([slug, name]) => ({ slug, name }
 	</head>
 	<body>
 		<Header />
-		<main data-blog>
+		<main data-blog data-blog-path={blogPath}>
 			<h1>Lab News & Updates</h1>
 			<p style="margin-bottom: 2rem; max-width: 700px; color: var(--color-text-muted);">
 				Explore our latest research highlights, tutorials, and announcements.
@@ -266,12 +270,8 @@ const tags = Array.from(tagsMap.entries()).map(([slug, name]) => ({ slug, name }
 			{/* Blog Post List */}
 			<div class="blog-list" data-blog-list>
 				{posts.map((post) => {
-					const categorySlug = post.data.category
-						? post.data.category.toLowerCase().replace(/\s+/g, '-')
-						: '';
-					const tagSlugs = (post.data.tags || [])
-						.map((t) => t.toLowerCase().replace(/\s+/g, '-'))
-						.join(' ');
+					const categorySlug = post.data.category ? slugify(post.data.category) : '';
+					const tagSlugs = (post.data.tags || []).map(slugify).join(' ');
 
 					return (
 						<article
@@ -346,6 +346,7 @@ const tags = Array.from(tagsMap.entries()).map(([slug, name]) => ({ slug, name }
 			const blogContainer = document.querySelector('[data-blog]');
 			if (blogContainer) {
 				const PAGE_SIZE = 10;
+				const blogPath = blogContainer.getAttribute('data-blog-path') || '/blog/';
 
 				const posts = [...blogContainer.querySelectorAll('[data-post]')];
 				const categoryButtons = [...blogContainer.querySelectorAll('[data-category-filter]')];
@@ -371,7 +372,7 @@ const tags = Array.from(tagsMap.entries()).map(([slug, name]) => ({ slug, name }
 					if (state.cat) params.set('cat', state.cat);
 					if (state.tag) params.set('tag', state.tag);
 					const query = params.toString();
-					history.pushState(state, '', query ? `/blog/?${query}` : '/blog/');
+					history.pushState(state, '', query ? `${blogPath}?${query}` : blogPath);
 				};
 
 				// Filter posts
