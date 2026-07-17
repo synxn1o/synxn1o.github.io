@@ -140,13 +140,16 @@ const tags = Array.from(tagsMap.entries()).map(([slug, name]) => ({ slug, name }
 			/* Filter styles */
 			.filter-section {
 				margin-bottom: 1.25rem;
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				gap: 0.5rem;
 			}
 			.filter-label {
 				font-size: 0.7rem;
 				text-transform: uppercase;
 				letter-spacing: 0.1em;
 				color: var(--color-text-muted);
-				margin-bottom: 0.6rem;
 				font-weight: 600;
 			}
 			.filter-pills {
@@ -367,7 +370,7 @@ const tags = Array.from(tagsMap.entries()).map(([slug, name]) => ({ slug, name }
 				};
 
 				// Write state to URL
-				const writeUrl = (state: { cat: string; tag: string }) => {
+				const writeUrl = (state) => {
 					const params = new URLSearchParams();
 					if (state.cat) params.set('cat', state.cat);
 					if (state.tag) params.set('tag', state.tag);
@@ -376,7 +379,7 @@ const tags = Array.from(tagsMap.entries()).map(([slug, name]) => ({ slug, name }
 				};
 
 				// Filter posts
-				const getFilteredPosts = (cat: string, tag: string) => {
+				const getFilteredPosts = (cat, tag) => {
 					return posts.filter((post) => {
 						const postCat = post.getAttribute('data-category') || '';
 						const postTags = (post.getAttribute('data-tags') || '').split(' ');
@@ -388,11 +391,12 @@ const tags = Array.from(tagsMap.entries()).map(([slug, name]) => ({ slug, name }
 				};
 
 				// Render filtered posts
-				const render = (state: { cat: string; tag: string }, resetPage = true) => {
+				const render = (state, resetPage = true) => {
 					if (resetPage) currentPage = 1;
 
 					const filtered = getFilteredPosts(state.cat, state.tag);
 					const visibleCount = Math.min(filtered.length, currentPage * PAGE_SIZE);
+					const remaining = filtered.length - visibleCount;
 
 					// Hide all posts
 					posts.forEach((post) => (post as HTMLElement).hidden = true);
@@ -419,12 +423,12 @@ const tags = Array.from(tagsMap.entries()).map(([slug, name]) => ({ slug, name }
 						(emptyState as HTMLElement).hidden = filtered.length > 0;
 					}
 
-					// Show/hide load more button
+					// Show/hide load more button - hide if no remaining posts
 					if (loadMoreWrap) {
-						(loadMoreWrap as HTMLElement).hidden = visibleCount >= filtered.length;
+						(loadMoreWrap as HTMLElement).hidden = remaining <= 0;
 					}
-					if (loadMoreBtn) {
-						loadMoreBtn.textContent = `Load more (${filtered.length - visibleCount} remaining)`;
+					if (loadMoreBtn && remaining > 0) {
+						loadMoreBtn.textContent = `Load more (${remaining} remaining)`;
 					}
 				};
 
