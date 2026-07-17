@@ -1,3 +1,4 @@
 {"type":"server-started","port":58742,"host":"127.0.0.1","url_host":"localhost","url":"http://localhost:58742","screen_dir":"/mnt/e/synxn1o.github.io/.superpowers/brainstorm/16900-1784292764/content","state_dir":"/mnt/e/synxn1o.github.io/.superpowers/brainstorm/16900-1784292764/state"}
 {"source":"user-event","type":"click","text":"A\n    \n      Reference Style (Pill Buttons)\n      Thin uppercase labels with rounded pill buttons. Matches the /mnt/e/blog implementation.","choice":"a","id":null,"timestamp":1784292966160}
 {"source":"user-event","type":"click","text":"A\n    \n      Reference Style (Pill Buttons)\n      Thin uppercase labels with rounded pill buttons. Matches the /mnt/e/blog implementation.","choice":"a","id":null,"timestamp":1784292974604}
+{"type":"server-stopped","reason":"idle timeout"}

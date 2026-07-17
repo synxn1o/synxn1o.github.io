@@ -79,6 +79,10 @@ html {
 	box-sizing: inherit;
 }
 
+[hidden] {
+	display: none !important;
+}
+
 body {
 	font-family: var(--font-sans);
 	background-color: var(--color-bg);
