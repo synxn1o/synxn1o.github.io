@@ -56,9 +56,6 @@ const tags = Array.from(tagsMap.entries()).map(([slug, name]) => ({ slug, name }
 				padding-bottom: 3rem;
 				border-bottom: 1px solid var(--color-border);
 			}
-			.blog-post-card:not(:has(.blog-thumb)) .blog-content {
-				flex: 1;
-			}
 			.blog-post-card:last-child {
 				border-bottom: none;
 			}
@@ -324,11 +321,11 @@ const tags = Array.from(tagsMap.entries()).map(([slug, name]) => ({ slug, name }
 								<a href={url(`/blog/${post.id}/`)} class="read-more">Read Article &rarr;</a>
 							</div>
 
-							{post.data.thumbnail && (
-								<a href={url(`/blog/${post.id}/`)} class="blog-thumb">
+							<a href={url(`/blog/${post.id}/`)} class="blog-thumb" style={!post.data.thumbnail ? 'visibility: hidden;' : ''}>
+								{post.data.thumbnail && (
 									<img src={post.data.thumbnail} alt={post.data.title} />
-								</a>
-							)}
+								)}
+							</a>
 						</article>
 					);
 				})}
