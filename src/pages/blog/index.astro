@@ -250,9 +250,9 @@ const tags = Array.from(tagsMap.entries()).map(([slug, name]) => ({ slug, name }
 				<div class="filter-section">
 					<div class="filter-label">CATEGORIES</div>
 					<div class="filter-pills" data-category-filters>
-						<button class="filter-pill active" data-category-filter="">All</button>
+						<a class="filter-pill active" data-category-filter="" href="/blog">All</a>
 						{categories.map((cat) => (
-							<button class="filter-pill" data-category-filter={cat.slug}>{cat.name}</button>
+							<a class="filter-pill" data-category-filter={cat.slug} href={`/blog?cat=${cat.slug}`}>{cat.name}</a>
 						))}
 					</div>
 				</div>
@@ -264,7 +264,7 @@ const tags = Array.from(tagsMap.entries()).map(([slug, name]) => ({ slug, name }
 					<div class="filter-label">TAGS</div>
 					<div class="filter-pills" data-tag-filters>
 						{tags.map((tag) => (
-							<button class="filter-pill tag-pill" data-tag-filter={tag.slug}>#{tag.name}</button>
+							<a class="filter-pill tag-pill" data-tag-filter={tag.slug} href={`/blog?tag=${tag.slug}`}>#{tag.name}</a>
 						))}
 					</div>
 				</div>
@@ -434,35 +434,20 @@ const tags = Array.from(tagsMap.entries()).map(([slug, name]) => ({ slug, name }
 					}
 				};
 
-				// Category filter click
-				categoryButtons.forEach((btn) => {
-					btn.addEventListener('click', () => {
-						try {
-							const state = stateFromUrl();
-							const rawCat = btn.getAttribute('data-category-filter') || '';
-							const newCat = (rawCat && state.cat === rawCat) ? '' : rawCat;
-							const newState = { ...state, cat: newCat };
-							writeUrl(newState);
-							render(newState);
-						} catch (e) {
-							console.error('Category filter error:', e);
-						}
-					});
-				});
-
-				// Tag filter click
-				tagButtons.forEach((btn) => {
-					btn.addEventListener('click', () => {
-						try {
-							const state = stateFromUrl();
-							const tagValue = btn.getAttribute('data-tag-filter') || '';
-							const newTag = state.tag === tagValue ? '' : tagValue;
-							const newState = { ...state, tag: newTag };
-							writeUrl(newState);
-							render(newState);
-						} catch (e) {
-							console.error('Tag filter error:', e);
-						}
+				// Filter click handler (combined like reference)
+				[...categoryButtons, ...tagButtons].forEach((link) => {
+					link.addEventListener('click', (event) => {
+						event.preventDefault();
+						const cat = link.getAttribute('data-category-filter');
+						const tag = link.getAttribute('data-tag-filter');
+						const state = stateFromUrl();
+						const newState = {
+							...state,
+							cat: cat === null ? state.cat : cat,
+							tag: tag === null ? state.tag : state.tag === tag ? '' : tag,
+						};
+						writeUrl(newState);
+						render(newState);
 					});
 				});
 
