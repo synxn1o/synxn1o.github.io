@@ -1,12 +1,47 @@
 [
   {
-    "id": "placeholder",
-    "title": "placeholder",
-    "description": "A comprehensive philosophical investigation challenging conventional Judeo-Christian moral frameworks and exploring the genealogy of moral concepts. This work proposes a fundamental reevaluation of all values through the lens of the will to power.",
-    "year": 1887,
+    "id": "tda-adversarial-ml",
+    "title": "Topological Data Analysis and Machine Learning Safety",
+    "description": "Reproduces the work of Ma et al. (2018) characterizing adversarial data subspaces using Local Intrinsic Dimensionality (LID). Leverages recent Topological Data Analysis (TDA) theories and tools to improve the safety of machine learning models, proposes hypotheses on results, and designs numerical verification experiments.",
+    "year": 2025,
     "status": "Completed",
-    "authors": ["friedrich-nietzsche"],
-    "heroImage": "/src/assets/blog-placeholder-2.jpg",
-    "link": "https://en.wikipedia.org/wiki/On_the_Genealogy_of_Morality"
+    "authors": ["xiaoyun-liu"],
+    "link": "https://github.com/synxn1o/torch_lid_adversarial_subspace_detection"
+  },
+  {
+    "id": "mcm-2025",
+    "title": "Mathematical Contest in Modeling 2025",
+    "description": "Developed a network model to analyze, simulate, and optimize traffic flows of various transportation shares in Baltimore, MD. Won the Honorable Mention Prize in the MCM-ICM 2025 competition.",
+    "year": 2024,
+    "status": "Honorable Mention",
+    "authors": ["xiaoyun-liu"],
+    "link": null
+  },
+  {
+    "id": "hamming-golay-codes",
+    "title": "Hamming Codes and Golay Codes",
+    "description": "Individual study on Hamming Codes and Golay Codes during the Applied Abstract Algebra course taught by Fields Medalist Efim Zelmanov. Presented findings in class.",
+    "year": 2024,
+    "status": "Completed",
+    "authors": ["xiaoyun-liu"],
+    "link": null
+  },
+  {
+    "id": "atmospheric-latent-release",
+    "title": "Numerical Methods for Calculating Atmospheric Latent Release",
+    "description": "Designed a finite difference scheme to solve the Adiabatic Heating Equation (an elliptic equation describing latent release) of the Quasi-Geostrophic Equation Set in a parallelized manner. Leveraged the spectral spherical harmonics method to improve convergence, applying techniques from Scientific Computation (lectured by Alexander Kurganov). Supervised by Dr. Li Dong.",
+    "year": 2025,
+    "status": "Research",
+    "authors": ["xiaoyun-liu"],
+    "link": "https://github.com/synxn1o/Spring-2024-SUSTECH/tree/main/Project%20Yagi"
+  },
+  {
+    "id": "cumcm-2023",
+    "title": "CUMCM 2023 — Bayesian Pricing & Inventory Strategy",
+    "description": "Proposed a Bayesian pricing and inventory strategy model, optimized via polar coordinate transformations and integrated with machine learning algorithms. Awarded Provincial Third Prize in the China Undergraduate Mathematical Contest in Modeling (CUMCM) 2023.",
+    "year": 2023,
+    "status": "Provincial Third Prize",
+    "authors": ["xiaoyun-liu"],
+    "link": "https://github.com/synxn1o/Spring-2024-SUSTECH/blob/main/Automatic%20Pricing%20and%20Inventory%20Replenishment%20Strategy%20Model%20Based%20on%20Polar%20Coordinate%20Transformation%20Regression.pdf"
   }
 ]
