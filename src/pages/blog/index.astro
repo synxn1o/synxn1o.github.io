@@ -435,24 +435,32 @@ const tags = Array.from(tagsMap.entries()).map(([slug, name]) => ({ slug, name }
 				// Category filter click
 				categoryButtons.forEach((btn) => {
 					btn.addEventListener('click', () => {
-						const state = stateFromUrl();
-						const rawCat = btn.getAttribute('data-category-filter') || '';
-						const newCat = (rawCat && state.cat === rawCat) ? '' : rawCat;
-						const newState = { ...state, cat: newCat };
-						writeUrl(newState);
-						render(newState);
+						try {
+							const state = stateFromUrl();
+							const rawCat = btn.getAttribute('data-category-filter') || '';
+							const newCat = (rawCat && state.cat === rawCat) ? '' : rawCat;
+							const newState = { ...state, cat: newCat };
+							writeUrl(newState);
+							render(newState);
+						} catch (e) {
+							console.error('Category filter error:', e);
+						}
 					});
 				});
 
 				// Tag filter click
 				tagButtons.forEach((btn) => {
 					btn.addEventListener('click', () => {
-						const state = stateFromUrl();
-						const tagValue = btn.getAttribute('data-tag-filter') || '';
-						const newTag = state.tag === tagValue ? '' : tagValue;
-						const newState = { ...state, tag: newTag };
-						writeUrl(newState);
-						render(newState);
+						try {
+							const state = stateFromUrl();
+							const tagValue = btn.getAttribute('data-tag-filter') || '';
+							const newTag = state.tag === tagValue ? '' : tagValue;
+							const newState = { ...state, tag: newTag };
+							writeUrl(newState);
+							render(newState);
+						} catch (e) {
+							console.error('Tag filter error:', e);
+						}
 					});
 				});
 
@@ -471,7 +479,11 @@ const tags = Array.from(tagsMap.entries()).map(([slug, name]) => ({ slug, name }
 				});
 
 				// Initial render
-				render(stateFromUrl());
+				try {
+					render(stateFromUrl());
+				} catch (e) {
+					console.error('Blog filter error:', e);
+				}
 			}
 		</script>
 	</body>
