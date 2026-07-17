@@ -12,8 +12,8 @@ async function loadGoogleFont(font: string, text: string) {
     return res.arrayBuffer();
 }
 
-export async function generateProjectHeroSvg(title: string, status: string, year: number) {
-    const textToLoad = title + status + String(year) + "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+export async function generateProjectHeroSvg(title: string, category: string, year: number) {
+    const textToLoad = title + category + String(year) + "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     const fontDataRegular = await loadGoogleFont("Inter", textToLoad);
     const fontDataBold = await loadGoogleFont("Inter:wght@700", textToLoad);
 
@@ -26,7 +26,7 @@ export async function generateProjectHeroSvg(title: string, status: string, year
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
                     <div style="display: flex; align-items: center; padding: 10px 20px; background-color: rgba(255, 255, 255, 0.1); border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.2);">
                         <span style="color: #ffffff; font-size: 22px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">
-                            ${status}
+                            ${category}
                         </span>
                     </div>
                 </div>
