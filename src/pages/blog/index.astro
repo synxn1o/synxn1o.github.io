@@ -431,7 +431,8 @@ const tags = Array.from(tagsMap.entries()).map(([slug, name]) => ({ slug, name }
 				categoryButtons.forEach((btn) => {
 					btn.addEventListener('click', () => {
 						const state = stateFromUrl();
-						const newCat = btn.getAttribute('data-category-filter') || '';
+						const rawCat = btn.getAttribute('data-category-filter') || '';
+						const newCat = (rawCat && state.cat === rawCat) ? '' : rawCat;
 						const newState = { ...state, cat: newCat };
 						writeUrl(newState);
 						render(newState);
