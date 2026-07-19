@@ -14,7 +14,7 @@ export default defineConfig({
 	compressHTML: true,
 	integrations: [
 		mdx(),
-		sitemap()
+		sitemap({ entryLimit: Infinity })
 	],
 	markdown: {
 		shikiConfig: {
