@@ -5,7 +5,7 @@ export const GET: APIRoute = ({ site, url }) => {
 User-agent: *
 Allow: /
 
-Sitemap: ${new URL(import.meta.env.BASE_URL + "sitemap-index.xml", site || url).href}
+Sitemap: ${new URL(import.meta.env.BASE_URL + "sitemap.xml", site || url).href}
   `.trim();
 
     return new Response(robots, {
